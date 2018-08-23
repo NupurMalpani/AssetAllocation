@@ -26,9 +26,9 @@ public class ClientDAO {
 			responseValue=rs.getFloat("ResponseValue");
 			weightAllocated=rs.getFloat("WeightsAllocated");
 			Questions question=new Questions(responseId,responseValue,weightAllocated);
-			questions.add(question);
-			clientResponse=new ClientResponse(clientId, questions, null);
+			questions.add(question);	
 		}
+		clientResponse=new ClientResponse(clientId, questions, null);
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
