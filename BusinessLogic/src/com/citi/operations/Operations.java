@@ -17,6 +17,8 @@ import org.apache.commons.math3.util.MathArrays.Function;
 
 import com.citi.pojo.AllocatedAssetResult;
 import com.citi.pojo.Asset;
+import com.citi.pojo.ClientResponse;
+import com.citi.pojo.Questions;
 
 import edu.rit.numeric.NonNegativeLeastSquares;
 
@@ -86,6 +88,25 @@ public class Operations {
 			System.arraycopy(IntStream.range(0,variables).toArray(),0,leastSquares.index,0,variables);
 			leastSquares.solve();
 			return leastSquares.x;
+		}
+		public static double calculateRisk(List<Asset> assets,ClientResponse clientResponse){
+			double ans=0;
+			List<Questions> questions=clientResponse.getQuestionsResponses();
+			double sum=0;
+			for(Questions question:questions){
+				sum=sum+(question.getResponseValue())*(question.getQuestionWeightage());
+			}
+			double avg=sum/questions.size();
+			ans=riskScaler(avg,assets);
+			return ans;
+		}
+		private static double riskScaler(double avg,List<Asset> asssets){
+			double rMin=Double.MAX_VALUE,rMax=Double.MIN_VALUE;
+		    for(Asset asset:asssets){
+		    	rMin=Math.min(rMin, asset.getRisk());
+		    	rMax=Math.max(rMax, asset.getRisk());
+		    }
+		    return rMin+(rMax-rMin)*avg;
 		}
 		
 }
