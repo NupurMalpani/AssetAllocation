@@ -19,7 +19,7 @@ public class AssetDAO {
 		try {
 		Connection conn=MyConnection.getMyConnection();
 		assets=new ArrayList<>();
-		String FIND_ALL_ASSETS="SELECT * FROM Asset;";
+		String FIND_ALL_ASSETS="SELECT * FROM Asset;"; 
 		Statement statement=conn.createStatement();
 		ResultSet rs=statement.executeQuery(FIND_ALL_ASSETS);
 		while(rs.next()) {
