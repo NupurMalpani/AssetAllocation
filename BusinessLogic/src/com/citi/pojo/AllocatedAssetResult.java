@@ -16,6 +16,11 @@ public AllocatedAssetResult() {
 	this.goalsMet = -2;
 }
 
+public AllocatedAssetResult(long clientId) {
+	super();
+	this.clientId = clientId;
+}
+
 public AllocatedAssetResult(long clientId, double allocatedRatioEquity, double allocatedRatioFixedIncome,
 		double allocatedRatioCommodity, int goalsMet) {
 	super();
