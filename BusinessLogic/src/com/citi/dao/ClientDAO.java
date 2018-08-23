@@ -19,7 +19,7 @@ public class ClientDAO {
 		preparedStatement.setInt(1,clientId);
 		ResultSet rs=preparedStatement.executeQuery();
 		List<Questions> questions = new ArrayList<>();
-		while(rs.next()) {
+		while(rs.next()) { 
 			int responseId;
 			float responseValue,weightAllocated;
 			responseId=rs.getInt("ResponseID");
