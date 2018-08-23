@@ -8,7 +8,7 @@ public class Equity extends Asset {
 	}
 
 	public Equity( double risk, double reward) {
-		super(1, risk, reward);
+		super(1,"Equity", risk, reward);
 		// TODO Auto-generated constructor stub
 	}
 

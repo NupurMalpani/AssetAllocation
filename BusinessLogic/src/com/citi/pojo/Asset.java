@@ -2,17 +2,20 @@ package com.citi.pojo;
 
 public abstract class Asset {
 protected int assetId;
+protected String assetName;
 protected double risk;
 protected double reward;
-public Asset(int assetId, double risk, double reward) {
+public Asset(int assetId, String assetName, double risk, double reward) {
 	super();
 	this.assetId = assetId;
+	this.assetName=assetName;
 	this.risk = risk;
 	this.reward = reward;
 }
 public Asset() {
 	super();
 	this.assetId = -1;
+	this.assetName=" ";
 	this.risk = -1;
 	this.reward = -1;
 }
@@ -30,6 +33,12 @@ public void setRisk(double risk) {
 }
 public double getReward() {
 	return reward;
+}
+public String getAssetName() {
+	return assetName;
+}
+public void setAssetName(String assetName) {
+	this.assetName = assetName;
 }
 public void setReward(double reward) {
 	this.reward = reward;
