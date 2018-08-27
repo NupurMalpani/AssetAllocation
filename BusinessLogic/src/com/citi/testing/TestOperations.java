@@ -40,16 +40,24 @@ public class TestOperations {
 		for(int i=0;i<5;i++){
 			questions.add(new Question(i, -1, 1));
 		}
-		List<Asset> assets=new ArrayList();
+		List<Asset> assets=new ArrayList<>();
 		Equity equity=new Equity(3, 3);
+		boolean testBoolValue=false;
 		FixedIncome fixedIncome=new FixedIncome(1, 1);
 		Commodity commodity=new Commodity(2, 2);
 		assets.add(fixedIncome);
 		assets.add(equity);
 		assets.add(commodity);
+		int random = (int)(Math.random()*100);
+		if(random%2==0) {
+			testBoolValue=true;
+		}
+		else {
+			testBoolValue=false;
+		}
 		List<ClientGoal> goals=new ArrayList<>();
 		for(int i=0;i<5;i++){
-			goals.add(new ClientGoal(i, 20000, 2018, 2020));
+			goals.add(new ClientGoal(i, 20000, 2018, 2020,testBoolValue));//change true to random bool
 		}
 		ClientResponse clientResponse=new ClientResponse(1, questions, goals);
 		Operations operations=new Operations();
@@ -66,12 +74,20 @@ public class TestOperations {
 		Equity equity=new Equity(3, 3);
 		FixedIncome fixedIncome=new FixedIncome(1, 1);
 		Commodity commodity=new Commodity(2, 2);
+		boolean testBoolValue=false;
+		int random = (int)(Math.random()*100);
+		if(random%2==0) {
+			testBoolValue=true;
+		}
+		else {
+			testBoolValue=false;
+		}
 		assets.add(fixedIncome);
 		assets.add(equity);
 		assets.add(commodity);
 		List<ClientGoal> goals=new ArrayList<>();
 		for(int i=0;i<5;i++){
-			goals.add(new ClientGoal(i, 20000, 2018, 2020));
+			goals.add(new ClientGoal(i, 20000, 2018, 2020,testBoolValue));//change true to random bool
 		}
 		ClientResponse clientResponse=new ClientResponse(1, questions, goals);
 		Operations operations=new Operations();
