@@ -11,7 +11,7 @@ import com.citi.pojo.Tuple;
 
 public class AllocatedAssetResultDAO {
 	public int storeAllocatedAssets(AllocatedAssetResult result) {
-		int rowsAffected=0;
+		int rowsAffected=0; 
 		Connection conn = MyConnection.getMyConnection();
 		String INSERT_ALLOCATED_ASSETS="INSERT INTO AllocatedAssetResult VALUES(?,?,?)";
 		try {
