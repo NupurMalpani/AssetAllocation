@@ -16,6 +16,7 @@ import org.apache.commons.math3.util.MathArrays.Function;
 
 import com.citi.pojo.AllocatedAssetResult;
 import com.citi.pojo.Asset;
+import com.citi.pojo.ClientGoal;
 import com.citi.pojo.ClientResponse;
 import com.citi.pojo.Questions;
 import com.citi.pojo.Tuple;
@@ -93,9 +94,13 @@ public class Operations {
 			List<Questions> questions=clientResponse.getQuestionsResponses();
 			double sum=0;
 			for(Questions question:questions){
+				if(question.getResponseValue()>0){
 				sum=sum+(question.getResponseValue())*(question.getQuestionWeightage());
+				}
 			}
 			double avg=sum/questions.size();
+			if(avg==0)
+				return 0;
 			ans=riskScaler(avg,assets);
 			return ans;
 		}
@@ -106,6 +111,15 @@ public class Operations {
 		    	rMax=Math.max(rMax, asset.getRisk());
 		    }
 		    return rMin+(rMax-rMin)*avg;
+		}
+		public static double calculateAmount(ClientResponse clientResponse,double reward){
+			List<ClientGoal> clientgoals=clientResponse.getGoals();
+			double amt=0;
+			for(ClientGoal clientGoal:clientgoals){
+				double den=Math.pow((1+reward),(clientGoal.getTargetYear()-clientGoal.getCurrentYear()));
+				amt=amt+(clientGoal.getGoalAmount()/den);
+			}
+			return amt;
 		}
 		
 }

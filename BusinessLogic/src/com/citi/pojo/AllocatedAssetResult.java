@@ -43,6 +43,13 @@ public void setClientId(long clientId) {
 }
 
 
+public List<Tuple<Integer, Double>> getAllocatedAssetResult() {
+	return allocatedAssetResult;
+}
+
+public void setAllocatedAssetResult(List<Tuple<Integer, Double>> allocatedAssetResult) {
+	this.allocatedAssetResult = allocatedAssetResult;
+}
 
 public int getGoalsMet() {
 	return goalsMet;
