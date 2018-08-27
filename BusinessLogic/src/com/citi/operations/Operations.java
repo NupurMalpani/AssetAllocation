@@ -41,11 +41,12 @@ public class Operations {
 			double arr[] = {risk};
 			return function.evaluate(arr);
 		}
-		public static List<Tuple<ClientGoal, Boolean>> goalsMet(ClientResponse clientResponse,double reward ){
+		
+		public static List<Tuple<ClientGoal, Boolean>> goalsMet(ClientResponse clientResponse,double risk,Function function ){
 			List<Tuple<ClientGoal, Boolean>> goalsMetList = null ;
 			List<ClientGoal> clientGoals = clientResponse.getGoals();
 			for(ClientGoal goal : clientGoals){
-				if(goal.getGoalAmount()>calculateAmount(clientResponse, reward)){
+				if(goal.getGoalAmount()>calculateAmount(clientResponse, calculateReward(function, risk))){
 					Tuple<ClientGoal, Boolean> goalMet = new Tuple<ClientGoal, Boolean>(goal, true);
 					goalsMetList.add(goalMet);
 					
