@@ -24,7 +24,7 @@ import com.citi.pojo.Tuple;
 import edu.rit.numeric.NonNegativeLeastSquares;
 
 public class Operations {
-		public   static PolynomialFunction fit_polynomial_curve(ArrayList<Asset> graphAssetPoints,int degree) {
+		public   static PolynomialFunction fit_polynomial_curve(List<Asset> graphAssetPoints,int degree) {
 			final WeightedObservedPoints obs = new WeightedObservedPoints();
 			//x-axis is risk, y-axis is reward.
 			//points in form of (x,y)
@@ -36,10 +36,10 @@ public class Operations {
 			final double[] coeff = fitter.fit(obs.toList());
 			return new PolynomialFunction(coeff);
 		}
-		public static double calculateReward(Function function,double risk) {
+		public static double calculateReward(List<Asset> assets,double risk,int degree) {
 			//this is already scaled risk
-			double arr[] = {risk};
-			return function.evaluate(arr);
+			PolynomialFunction function=fit_polynomial_curve(assets, degree);
+			return function.value(risk);
 		}
 		//Ax = b
 		// number of rows = equation, number of columns = variables
@@ -98,6 +98,7 @@ public class Operations {
 				sum=sum+(question.getResponseValue())*(question.getQuestionWeightage());
 				}
 			}
+			
 			double avg=sum/questions.size();
 			if(avg==0)
 				return 0;
@@ -112,7 +113,7 @@ public class Operations {
 		    }
 		    return rMin+(rMax-rMin)*avg;
 		}
-		public static double calculateAmount(ClientResponse clientResponse,double reward){
+		public static double calculateA(ClientResponse clientResponse,double reward){
 			List<ClientGoal> clientgoals=clientResponse.getGoals();
 			double amt=0;
 			for(ClientGoal clientGoal:clientgoals){
