@@ -4,7 +4,7 @@ import com.citi.pojo.ClientGoal;
 import com.citi.pojo.ClientResponse;
 import com.citi.pojo.Questions;
 public class ClientDAO {
-	public ClientResponse retrieveClientResponsesAndGoals(int clientId){
+	public ClientResponse retrieveClientResponsesAndGoals(long clientId){
 		ClientGoalDAO clientGoalDao=new ClientGoalDAO();
 		ClientResponseDAO clientResponseDao=new ClientResponseDAO();
 		ClientResponse clientResponse=new ClientResponse();

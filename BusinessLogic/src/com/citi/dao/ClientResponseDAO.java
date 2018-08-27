@@ -11,14 +11,14 @@ import com.citi.connections.MyConnection;
 import com.citi.pojo.Questions;
 
 public class ClientResponseDAO {
-	public List<Questions> fetchResponses(int clientId) {
+	public List<Questions> fetchResponses(long clientId) {
 		Connection conn=MyConnection.getMyConnection();
 		String FIND_CLIENT_RESPONSES="SELECT C.ResponseID,ResponseValue,WeightsAllocated FROM ClientResponse C INNER JOIN ResponseValueToWeightsAllocated R ON C.ResponseID=R.ResponseID WHERE C.ClientId=1;";
 		PreparedStatement preparedStatement;
 		List<Questions> questions = new ArrayList<>();
 		try {
 			preparedStatement = conn.prepareStatement(FIND_CLIENT_RESPONSES);
-			preparedStatement.setInt(1,clientId);
+			preparedStatement.setLong(1,clientId);
 			ResultSet rs=preparedStatement.executeQuery();
 			while(rs.next()) { 
 				int responseId; 
