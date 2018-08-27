@@ -1,6 +1,7 @@
 package com.citi.dao;
 
 import java.sql.Connection;
+import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
@@ -44,4 +45,35 @@ public class AssetDAO {
 		}
 		return (ArrayList<Asset>) assets;
 	}
+	
+public Asset retrieveAssetDetails(String assetName) {
+		
+		Asset asset = null;
+		try {
+		Connection conn=MyConnection.getMyConnection();
+		String FIND_ASSET="SELECT * FROM Asset where AssetName=?"; 
+		PreparedStatement preparedStatement=conn.prepareStatement(FIND_ASSET);
+		preparedStatement.setString(1, assetName);
+		ResultSet rs=preparedStatement.executeQuery();
+		while(rs.next()) {
+			switch(assetName) {
+			case "Commodity":
+				asset=new Commodity(rs.getDouble("Risk"),rs.getDouble("Reward"));
+				break;
+			case "Equity":
+				asset=new Equity(rs.getDouble("Risk"),rs.getDouble("Reward"));
+				break;
+			case "FixedIncome":
+				asset=new FixedIncome(rs.getDouble("Risk"),rs.getDouble("Reward"));
+				break;
+			}
+			
+		}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return asset;
+		
+	}
+	
 }

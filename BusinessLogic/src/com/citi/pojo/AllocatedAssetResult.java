@@ -1,18 +1,15 @@
 package com.citi.pojo;
 
+import java.util.List;
+
 public class AllocatedAssetResult {
 private long clientId;
-private double allocatedRatioEquity;
-private double allocatedRatioFixedIncome;
-private double allocatedRatioCommodity;
 private int goalsMet;
-
+private List<Tuple<Integer,Double>> allocatedAssetResult;
 public AllocatedAssetResult() {
+	//changed
 	// TODO Auto-generated constructor stub
 	this.clientId = -1;
-	this.allocatedRatioEquity = -1;
-	this.allocatedRatioFixedIncome = -1;
-	this.allocatedRatioCommodity = -1;
 	this.goalsMet = -2;
 }
 
@@ -21,14 +18,12 @@ public AllocatedAssetResult(long clientId) {
 	this.clientId = clientId;
 }
 
-public AllocatedAssetResult(long clientId, double allocatedRatioEquity, double allocatedRatioFixedIncome,
-		double allocatedRatioCommodity, int goalsMet) {
+public AllocatedAssetResult(long clientId, List<Tuple<Integer, Double>> allocatedAssetResult , int goalsMet) {
 	super();
 	this.clientId = clientId;
-	this.allocatedRatioEquity = allocatedRatioEquity;
-	this.allocatedRatioFixedIncome = allocatedRatioFixedIncome;
-	this.allocatedRatioCommodity = allocatedRatioCommodity;
 	this.goalsMet = goalsMet;
+	this.allocatedAssetResult=allocatedAssetResult;
+
 }
 
 public long getClientId() {
@@ -39,28 +34,13 @@ public void setClientId(long clientId) {
 	this.clientId = clientId;
 }
 
-public double getAllocatedRatioEquity() {
-	return allocatedRatioEquity;
+
+public List<Tuple<Integer, Double>> getAllocatedAssetResult() {
+	return allocatedAssetResult;
 }
 
-public void setAllocatedRatioEquity(double allocatedRatioEquity) {
-	this.allocatedRatioEquity = allocatedRatioEquity;
-}
-
-public double getAllocatedRatioFixedIncome() {
-	return allocatedRatioFixedIncome;
-}
-
-public void setAllocatedRatioFixedIncome(double allocatedRatioFixedIncome) {
-	this.allocatedRatioFixedIncome = allocatedRatioFixedIncome;
-}
-
-public double getAllocatedRatioCommodity() {
-	return allocatedRatioCommodity;
-}
-
-public void setAllocatedRatioCommodity(double allocatedRatioCommodity) {
-	this.allocatedRatioCommodity = allocatedRatioCommodity;
+public void setAllocatedAssetResult(List<Tuple<Integer, Double>> allocatedAssetResult) {
+	this.allocatedAssetResult = allocatedAssetResult;
 }
 
 public int getGoalsMet() {
