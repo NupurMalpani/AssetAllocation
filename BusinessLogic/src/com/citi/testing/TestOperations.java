@@ -17,7 +17,7 @@ import com.citi.pojo.ClientResponse;
 import com.citi.pojo.Commodity;
 import com.citi.pojo.Equity;
 import com.citi.pojo.FixedIncome;
-import com.citi.pojo.Questions;
+import com.citi.pojo.Question;
 
 public class TestOperations {
 
@@ -36,9 +36,9 @@ public class TestOperations {
 
 	@Test
 	public void testCalculateRisk_Negative() {
-		List<Questions> questions=new ArrayList<>();
+		List<Question> questions=new ArrayList<>();
 		for(int i=0;i<5;i++){
-			questions.add(new Questions(i, -1, 1));
+			questions.add(new Question(i, -1, 1));
 		}
 		List<Asset> assets=new ArrayList();
 		Equity equity=new Equity(3, 3);
@@ -58,9 +58,9 @@ public class TestOperations {
 	}
 	@Test
 	public void testCalculateRisk_Positive() {
-		List<Questions> questions=new ArrayList<>();
+		List<Question> questions=new ArrayList<>();
 		for(int i=0;i<5;i++){
-			questions.add(new Questions(i, 0.5, 1));
+			questions.add(new Question(i, 0.5, 1));
 		}
 		List<Asset> assets=new ArrayList();
 		Equity equity=new Equity(3, 3);

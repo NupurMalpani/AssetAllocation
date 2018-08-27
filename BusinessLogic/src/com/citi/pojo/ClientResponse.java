@@ -5,16 +5,16 @@ import java.util.List;
 
 public class ClientResponse {
 private long clientId;
-private List<Questions> questionsResponses;
+private List<Question> questionsResponses;
 private List<ClientGoal> goals;
 public ClientResponse() {
 
 	this.clientId = -1;
-	this.questionsResponses = new ArrayList<Questions>();
+	this.questionsResponses = new ArrayList<Question>();
 	this.goals = new ArrayList<ClientGoal>();
 }
 
-public ClientResponse(long clientId, List<Questions> questionsResponses, List<ClientGoal> goals) {
+public ClientResponse(long clientId, List<Question> questionsResponses, List<ClientGoal> goals) {
 	super();
 	this.clientId = clientId;
 	this.questionsResponses = questionsResponses;
@@ -35,10 +35,10 @@ public long getClientId() {
 public void setClientId(long clientId) {
 	this.clientId = clientId;
 }
-public List<Questions> getQuestionsResponses() {
+public List<Question> getQuestionsResponses() {
 	return questionsResponses;
 }
-public void setQuestionsResponses(List<Questions> questionsResponses) {
+public void setQuestionsResponses(List<Question> questionsResponses) {
 	this.questionsResponses = questionsResponses;
 }
 

@@ -18,7 +18,7 @@ import com.citi.pojo.AllocatedAssetResult;
 import com.citi.pojo.Asset;
 import com.citi.pojo.ClientGoal;
 import com.citi.pojo.ClientResponse;
-import com.citi.pojo.Questions;
+import com.citi.pojo.Question;
 import com.citi.pojo.Tuple;
 
 import edu.rit.numeric.NonNegativeLeastSquares;
@@ -117,9 +117,9 @@ public class Operations {
 		}
 		public static double calculateRisk(List<Asset> assets,ClientResponse clientResponse){
 			double ans=0;
-			List<Questions> questions=clientResponse.getQuestionsResponses();
+			List<Question> questions=clientResponse.getQuestionsResponses();
 			double sum=0;
-			for(Questions question:questions){
+			for(Question question:questions){
 				if(question.getResponseValue()>0){
 				sum=sum+(question.getResponseValue())*(question.getQuestionWeightage());
 				}
