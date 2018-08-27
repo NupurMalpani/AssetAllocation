@@ -7,6 +7,7 @@ private long clientId;
 private int goalsMet;
 private List<Tuple<Integer,Double>> allocatedAssetResult;
 public AllocatedAssetResult() {
+	//changed
 	// TODO Auto-generated constructor stub
 	this.clientId = -1;
 	this.goalsMet = -2;
