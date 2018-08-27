@@ -91,28 +91,80 @@ public class Operations {
 			double ratio =1.0;
 			double [][]a = createMatrixA(assets);
 			double [] b = createMatrixB(calculatedRisk, calculatedReward, ratio);
+//			for(Asset asset:assets){
+//				System.out.println(asset.getAssetId());
+//			}
 			NonNegativeLeastSquares leastSquares = solveEquation(eqns, variables, a, b);
 			double[]x  = leastSquares.x;
-			int [] index = leastSquares.index;
+//			int [] index = leastSquares.index;
+//			System.out.println(Arrays.toString(index) +"index");
 			List<Tuple<Integer,Double>> allocation = new ArrayList<Tuple<Integer,Double>>();
 			for(int i = 0; i < x.length; i++) {
-				Tuple <Integer,Double> assetRatioTuple = new Tuple<Integer, Double>(assets.get(index[i]).getAssetId(),x[i]);
+				Tuple <Integer,Double> assetRatioTuple = new Tuple<Integer, Double>(assets.get(i).getAssetId(),x[i]);
 				allocation.add(assetRatioTuple);
 			}
 			return allocation;
+//			return null;
 		}
 		private static NonNegativeLeastSquares solveEquation(int eqns,int variables,double[][] a,double [] b) {
+//			String pythonFile = new File("PythonResources/nnls.py").getAbsolutePath();
+//			System.out.println(pythonFile);
+//			System.out.println(new File("PythonResources/nnls.py").exists());
+//			int z = new Random().nextInt();
+//			File a_ =  new File(""+clientID+"a"+z+".txt");
+//			File b_ = new File(""+clientID+"b"+z+".txt");
+//			File x_ = new File(""+clientID+"x"+z+".txt");
+//			System.out.println(a_.getAbsolutePath());
+//			System.out.println(b_.getAbsolutePath());
+//			double arr[] = null;
+//			String aString ="";
+//			String s;
+//			for(double[] d:a){
+//				s = Arrays.toString(d);
+//				aString = aString + s.substring(1, s.length() - 1)+"\n";
+//			}
+//			s = Arrays.toString(b);
+//			String bString = s.substring(1,s.length() - 1);
+//			System.out.println(aString +"\n"+bString);
+//			try {
+//				a_.createNewFile();
+//				b_.createNewFile();
+//				x_.createNewFile();
+//				System.out.println(a_.exists());
+//				System.out.println(b_.exists());
+//				FileWriter fa = new FileWriter(a_);
+//				fa.write(aString);
+//				fa.close();
+//				FileWriter fb = new FileWriter(b_);
+//				fb.write(bString);
+//				fb.close();
+//				Runtime rt = Runtime.getRuntime();
+//				Process pr = rt.exec("python "+pythonFile +" "+ a_.getAbsolutePath() + " "+b_.getAbsolutePath()+" "+x_.getAbsolutePath());
+//				List<String> lines = Files.readAllLines(Paths.get(x_.getAbsolutePath()));
+//				x_.delete();
+//				arr = lines.stream().map(u -> Double.valueOf(u)).mapToDouble(i -> i).toArray();
+//			} catch (IOException e) {
+//				// TODO Auto-generated catch block
+//				e.printStackTrace();
+//			}
+			
 			//eqns = number of eqns
 			//vars =number of variables
 			NonNegativeLeastSquares leastSquares = new NonNegativeLeastSquares(eqns,variables);
-			for(int eqn = 0; eqn < eqns; eqn++){
+			for(int eqn = 0; eqn < eqns; eqn++){ 
 				leastSquares.a[eqn] = Arrays.copyOfRange(a[eqn], 0, variables);
-
+				leastSquares.b[eqn] = b[eqn];
 			}
+			
 			leastSquares.nsetp = variables;
 			System.arraycopy(IntStream.range(0,variables).toArray(),0,leastSquares.index,0,variables);
+//			for(double d:leastSquares.x){System.out.println(d);}
 			leastSquares.solve();
+//			for(double d:b){System.out.println(d);}
+//			for(double d:leastSquares.x){System.out.println(d);}
+//			System.out.println(leastSquares.x);
 			return leastSquares;
+//			return arr;
 		}
 		public static double calculateRisk(List<Asset> assets,ClientResponse clientResponse){
 			double ans=0;
