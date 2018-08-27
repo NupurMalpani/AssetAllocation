@@ -131,7 +131,7 @@ public class TestOperations {
 		FixedIncome fixedIncome=new FixedIncome(1, 1);
 		Commodity commodity=new Commodity(2, 2);
 		boolean testBoolValue=false;
-		int random = (int)(Math.random()*100);
+		int random = new Random().nextInt();
 		if(random%2==0) {
 			testBoolValue=true;
 		}
@@ -151,6 +151,4 @@ public class TestOperations {
 		double ans=Operations.calculateRisk(assets, clientResponse);
 		assertEquals(2,ans,0);
 	}
-
-
 }
