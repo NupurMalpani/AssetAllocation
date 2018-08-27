@@ -2,13 +2,13 @@ package com.citi.dao;
 import java.util.List;
 import com.citi.pojo.ClientGoal;
 import com.citi.pojo.ClientResponse;
-import com.citi.pojo.Questions;
+import com.citi.pojo.Question;
 public class ClientDAO {
 	public ClientResponse retrieveClientResponsesAndGoals(long clientId){
 		ClientGoalDAO clientGoalDao=new ClientGoalDAO();
 		ClientResponseDAO clientResponseDao=new ClientResponseDAO();
 		ClientResponse clientResponse=new ClientResponse();
-		List<Questions> questions=clientResponseDao.fetchResponses(clientId);
+		List<Question> questions=clientResponseDao.fetchResponses(clientId);
 		List<ClientGoal> goals=clientGoalDao.fetchGoals(clientId);
 		clientResponse=new ClientResponse(clientId, questions,goals );
 		return clientResponse;

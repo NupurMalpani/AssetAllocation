@@ -8,14 +8,14 @@ import java.util.ArrayList;
 import java.util.List;
 
 import com.citi.connections.MyConnection;
-import com.citi.pojo.Questions;
+import com.citi.pojo.Question;
 
 public class ClientResponseDAO {
-	public List<Questions> fetchResponses(long clientId) {
+	public List<Question> fetchResponses(long clientId) {
 		Connection conn=MyConnection.getMyConnection();
 		String FIND_CLIENT_RESPONSES="SELECT C.ResponseID,ResponseValue,WeightsAllocated FROM ClientResponse C INNER JOIN ResponseValueToWeightsAllocated R ON C.ResponseID=R.ResponseID WHERE C.ClientId=1;";
 		PreparedStatement preparedStatement;
-		List<Questions> questions = new ArrayList<>();
+		List<Question> questions = new ArrayList<>();
 		try {
 			preparedStatement = conn.prepareStatement(FIND_CLIENT_RESPONSES);
 			preparedStatement.setLong(1,clientId);
@@ -26,7 +26,7 @@ public class ClientResponseDAO {
 				responseId=rs.getInt("ResponseID");
 				responseValue=rs.getFloat("ResponseValue");
 				weightAllocated=rs.getFloat("WeightsAllocated");
-				Questions question=new Questions(responseId,responseValue,weightAllocated);
+				Question question=new Question(responseId,responseValue,weightAllocated);
 				questions.add(question);
 			}
 		} catch (SQLException e) {
