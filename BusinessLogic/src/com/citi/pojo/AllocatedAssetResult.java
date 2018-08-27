@@ -33,7 +33,7 @@ public long getClientId() {
 public void setClientId(long clientId) {
 	this.clientId = clientId;
 }
-//
+
 
 public List<Tuple<Integer, Double>> getAllocatedAssetResult() {
 	return allocatedAssetResult;
