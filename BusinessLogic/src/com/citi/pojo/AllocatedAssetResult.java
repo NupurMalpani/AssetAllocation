@@ -18,13 +18,6 @@ public AllocatedAssetResult(long clientId) {
 	this.clientId = clientId;
 }
 
-public List<Tuple<Integer, Double>> getAllocatedAssetResult() {
-	return allocatedAssetResult;
-}
-
-public void setAllocatedAssetResult(List<Tuple<Integer, Double>> allocatedAssetResult) {
-	this.allocatedAssetResult = allocatedAssetResult;
-}
 
 public AllocatedAssetResult(long clientId, List<Tuple<Integer, Double>> allocatedAssetResult , int goalsMet) {
 	super();
