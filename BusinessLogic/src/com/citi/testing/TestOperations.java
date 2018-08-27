@@ -49,7 +49,7 @@ public class TestOperations {
 		assets.add(commodity);
 		List<ClientGoal> goals=new ArrayList<>();
 		for(int i=0;i<5;i++){
-			goals.add(new ClientGoal(i, 20000, 2018, 2020));
+			goals.add(new ClientGoal(i, 20000, 2018, 2020,false));
 		}
 		ClientResponse clientResponse=new ClientResponse(1, questions, goals);
 		Operations operations=new Operations();
@@ -71,7 +71,7 @@ public class TestOperations {
 		assets.add(commodity);
 		List<ClientGoal> goals=new ArrayList<>();
 		for(int i=0;i<5;i++){
-			goals.add(new ClientGoal(i, 20000, 2018, 2020));
+			goals.add(new ClientGoal(i, 20000, 2018, 2020,false));
 		}
 		ClientResponse clientResponse=new ClientResponse(1, questions, goals);
 		Operations operations=new Operations();
