@@ -59,7 +59,7 @@ public class Operations {
 			b[2] =ratio;
 			return b;
 		}
-		public static List<Tuple<Asset, Double>> calculateRatio(List<Asset> assets,double calculatedRisk,double calculatedReward) {
+		public static List<Tuple<Integer, Double>> calculateRatio(List<Asset> assets,double calculatedRisk,double calculatedReward) {
 			int eqns = 3; 
 			int variables = 3;
 			double ratio =1.0;
@@ -68,9 +68,9 @@ public class Operations {
 			NonNegativeLeastSquares leastSquares = solveEquation(eqns, variables, a, b);
 			double[]x  = leastSquares.x;
 			int [] index = leastSquares.index;
-			List<Tuple<Asset,Double>> allocation = new ArrayList<Tuple<Asset,Double>>();
+			List<Tuple<Integer,Double>> allocation = new ArrayList<Tuple<Integer,Double>>();
 			for(int i = 0; i < x.length; i++) {
-				Tuple <Asset,Double> assetRatioTuple = new Tuple<Asset, Double>(assets.get(index[i]),x[i]);
+				Tuple <Integer,Double> assetRatioTuple = new Tuple<Integer, Double>(assets.get(index[i]).getAssetId(),x[i]);
 				allocation.add(assetRatioTuple);
 			}
 			return allocation;
