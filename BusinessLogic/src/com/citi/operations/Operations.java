@@ -94,9 +94,13 @@ public class Operations {
 			List<Questions> questions=clientResponse.getQuestionsResponses();
 			double sum=0;
 			for(Questions question:questions){
+				if(question.getResponseValue()>0){
 				sum=sum+(question.getResponseValue())*(question.getQuestionWeightage());
+				}
 			}
 			double avg=sum/questions.size();
+			if(avg==0)
+				return 0;
 			ans=riskScaler(avg,assets);
 			return ans;
 		}
