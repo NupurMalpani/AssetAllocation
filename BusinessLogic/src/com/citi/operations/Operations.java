@@ -41,6 +41,30 @@ public class Operations {
 			double arr[] = {risk};
 			return function.evaluate(arr);
 		}
+		public static List<Tuple<ClientGoal, Boolean>> goalsMet(ClientResponse clientResponse,double reward ){
+			List<Tuple<ClientGoal, Boolean>> goalsMetList = null ;
+			List<ClientGoal> clientGoals = clientResponse.getGoals();
+			for(ClientGoal goal : clientGoals){
+				if(goal.getGoalAmount()>calculateAmount(clientResponse, reward)){
+					Tuple<ClientGoal, Boolean> goalMet = new Tuple<ClientGoal, Boolean>(goal, true);
+					goalsMetList.add(goalMet);
+					
+				}
+				else{
+					Tuple<ClientGoal, Boolean> goalMet = new Tuple<ClientGoal, Boolean>(goal, false);
+					goalsMetList.add(goalMet);
+				}
+			}
+			
+			return goalsMetList;
+			
+		}
+		public static long calculateAmountValue(ClientResponse clientResponse,double reward, int year){
+			double den=Math.pow((1+reward),year);
+			double amt = calculateAmount(clientResponse, reward);
+			double amountVal = amt*den;
+			return (long) amountVal;
+		}
 		//Ax = b
 		// number of rows = equation, number of columns = variables
 		private static double[][] createMatrixA(List<Asset> assets) {
@@ -121,5 +145,4 @@ public class Operations {
 			}
 			return amt;
 		}
-		
 }
