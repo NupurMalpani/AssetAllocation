@@ -1,5 +1,4 @@
 package com.citi.operations;
-
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
@@ -19,6 +18,7 @@ import com.citi.pojo.AllocatedAssetResult;
 import com.citi.pojo.Asset;
 import com.citi.pojo.ClientResponse;
 import com.citi.pojo.Questions;
+import com.citi.pojo.Tuple;
 
 import edu.rit.numeric.NonNegativeLeastSquares;
 
@@ -52,9 +52,6 @@ public class Operations {
 			Collections.addAll(a,risk,reward,ratioList);
 			return (double[][])a.toArray();
 		}
-		private static int[]  createIndex(List<Asset> assets) {
-			return assets.stream().mapToInt(asset -> asset.getAssetId()).toArray();
-		}
 		private static double[] createMatrixB(double calculatedRisk,double calculatedReward,double ratio) {
 			double[] b = new double[3];
 			b[0] = calculatedRisk;
@@ -62,21 +59,23 @@ public class Operations {
 			b[2] =ratio;
 			return b;
 		}
-		public static Map<Integer, Double> calculateRatio(List<Asset> assets,double calculatedRisk,double calculatedReward) {
+		public static List<Tuple<Asset, Double>> calculateRatio(List<Asset> assets,double calculatedRisk,double calculatedReward) {
 			int eqns = 3; 
 			int variables = 3;
 			double ratio =1.0;
 			double [][]a = createMatrixA(assets);
 			double [] b = createMatrixB(calculatedRisk, calculatedReward, ratio);
-			int[] index = createIndex(assets);
-			double[] x = solveEquation(eqns, variables, a, b);
-			Map<Integer,Double> allocation = new HashMap<Integer,Double>();
+			NonNegativeLeastSquares leastSquares = solveEquation(eqns, variables, a, b);
+			double[]x  = leastSquares.x;
+			int [] index = leastSquares.index;
+			List<Tuple<Asset,Double>> allocation = new ArrayList<Tuple<Asset,Double>>();
 			for(int i = 0; i < x.length; i++) {
-				allocation.put(index[i],x[i]);
+				Tuple <Asset,Double> assetRatioTuple = new Tuple<Asset, Double>(assets.get(index[i]),x[i]);
+				allocation.add(assetRatioTuple);
 			}
 			return allocation;
 		}
-		private static double[] solveEquation(int eqns,int variables,double[][] a,double [] b) {
+		private static NonNegativeLeastSquares solveEquation(int eqns,int variables,double[][] a,double [] b) {
 			//eqns = number of eqns
 			//vars =number of variables
 			NonNegativeLeastSquares leastSquares = new NonNegativeLeastSquares(eqns,variables);
@@ -87,7 +86,7 @@ public class Operations {
 			leastSquares.nsetp = variables;
 			System.arraycopy(IntStream.range(0,variables).toArray(),0,leastSquares.index,0,variables);
 			leastSquares.solve();
-			return leastSquares.x;
+			return leastSquares;
 		}
 		public static double calculateRisk(List<Asset> assets,ClientResponse clientResponse){
 			double ans=0;
