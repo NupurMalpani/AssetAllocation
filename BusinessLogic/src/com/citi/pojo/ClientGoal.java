@@ -23,6 +23,7 @@ public ClientGoal(long goalId, long goalAmount, int currentYear, int targetYear,
 	this.goalMet = goalMet;
 }
 
+
 public boolean isGoalMet() {
 	return goalMet;
 }
