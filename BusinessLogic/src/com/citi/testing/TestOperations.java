@@ -5,7 +5,6 @@ import static org.junit.Assert.*;
 import java.util.ArrayList;
 import java.util.List;
 
-import org.apache.commons.math3.ode.EquationsMapper;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
@@ -60,8 +59,7 @@ public class TestOperations {
 			goals.add(new ClientGoal(i, 20000, 2018, 2020,testBoolValue));//change true to random bool
 		}
 		ClientResponse clientResponse=new ClientResponse(1, questions, goals);
-		Operations operations=new Operations();
-		double ans=operations.calculateRisk(assets, clientResponse);
+		double ans=Operations.calculateRisk(assets, clientResponse);
 		assertEquals(0,ans,0);
 	}
 	@Test
@@ -70,7 +68,7 @@ public class TestOperations {
 		for(int i=0;i<5;i++){
 			questions.add(new Question(i, 0.5, 1));
 		}
-		List<Asset> assets=new ArrayList();
+		List<Asset> assets=new ArrayList<>();
 		Equity equity=new Equity(3, 3);
 		FixedIncome fixedIncome=new FixedIncome(1, 1);
 		Commodity commodity=new Commodity(2, 2);
@@ -92,8 +90,7 @@ public class TestOperations {
 			goals.add(new ClientGoal(i, 20000, 2018, 2020,testBoolValue));
 		}
 		ClientResponse clientResponse=new ClientResponse(1, questions, goals);
-		Operations operations=new Operations();
-		double ans=operations.calculateRisk(assets, clientResponse);
+		double ans=Operations.calculateRisk(assets, clientResponse);
 		assertEquals(2,ans,0);
 	}
 
