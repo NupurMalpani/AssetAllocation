@@ -42,11 +42,11 @@ public class Operations {
 			return function.value(risk);
 		}
 		
-		public static List<Tuple<ClientGoal, Boolean>> goalsMet(ClientResponse clientResponse,double risk,Function function ){
-			List<Tuple<ClientGoal, Boolean>> goalsMetList = null ;
-			List<ClientGoal> clientGoals = clientResponse.getGoals();
+		public static List<Tuple<ClientGoal, Boolean>> goalsMet(double presentValue,double reward,List<ClientGoal> clientGoals ){
+			List<Tuple<ClientGoal, Boolean>> goalsMetList = new ArrayList<>() ;
+			
 			for(ClientGoal goal : clientGoals){
-				if(goal.getGoalAmount()>calculateAmount(clientResponse, calculateReward(function, risk))){
+				if(goal.getGoalAmount()>calculateAmountValue(presentValue,reward,goal.getTargetYear())){
 					Tuple<ClientGoal, Boolean> goalMet = new Tuple<ClientGoal, Boolean>(goal, true);
 					goalsMetList.add(goalMet);
 					
@@ -61,10 +61,9 @@ public class Operations {
 			return goalsMetList;
 			
 		}
-		public static long calculateAmountValue(ClientResponse clientResponse,double reward, int year){
+		public static long calculateAmountValue(double presentValue,double reward, int year){
 			double den=Math.pow((1+reward),year);
-			double amt = calculateAmount(clientResponse, reward);
-			double amountVal = amt*den;
+			double amountVal = presentValue*den;
 			return (long) amountVal;
 		}
 		//Ax = b
