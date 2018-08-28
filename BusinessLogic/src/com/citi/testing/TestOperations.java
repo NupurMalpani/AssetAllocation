@@ -100,7 +100,7 @@ public class TestOperations {
 	public void testCalculateRiskNegative() {
 		List<Question> questions=new ArrayList<>();
 		for(int i=0;i<5;i++){
-			questions.add(new Question(i, -1, 1));
+			questions.add(new Question(i,'a', -1, 1));
 		}
 		List<Asset> assets=new ArrayList<>();
 		Equity equity=new Equity(3, 3);
@@ -129,7 +129,7 @@ public class TestOperations {
 	public void testCalculateRiskPositive() {
 		List<Question> questions=new ArrayList<>();
 		for(int i=0;i<5;i++){
-			questions.add(new Question(i, 0.5, 1));
+			questions.add(new Question(i,'b', 0.5, 1));
 		}
 		List<Asset> assets=new ArrayList<>();
 		Equity equity=new Equity(3, 3);

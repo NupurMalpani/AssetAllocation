@@ -2,18 +2,29 @@ package com.citi.pojo;
 
 public class Question {
 private long questionId;
+private char response;
 private double responseValue;
 private double questionWeightage;
 
 public Question() {
+	this.response = ' ';
 	this.questionId = -1;
 	this.responseValue = -1;
 	this.questionWeightage = -1;
 }
 
-public Question(long questionId, double responseValue, double questionWeightage) {
+public char getResponse() {
+	return response;
+}
+
+public void setResponse(char response) {
+	this.response = response;
+}
+
+public Question(long questionId, char response, double responseValue, double questionWeightage) {
 	super();
 	this.questionId = questionId;
+	this.response=response;
 	this.responseValue = responseValue;
 	this.questionWeightage = questionWeightage;
 }
