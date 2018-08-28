@@ -3,7 +3,11 @@ package com.citi.testing;
 import static org.junit.Assert.*;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
+import java.util.Map;
+import java.util.Random;
+import java.util.stream.Collectors;
 
 import org.junit.After;
 import org.junit.Before;
@@ -17,6 +21,7 @@ import com.citi.pojo.Commodity;
 import com.citi.pojo.Equity;
 import com.citi.pojo.FixedIncome;
 import com.citi.pojo.Question;
+import com.citi.pojo.Tuple;
 
 public class TestOperations {
 
@@ -46,7 +51,7 @@ public class TestOperations {
 		ans.add(new Tuple<Integer,Double>(1,0.2));
 		ans.add(new Tuple<Integer,Double>(2,0.5));
 		ans.add(new Tuple<Integer,Double>(3,0.3));
-		myAns = Operations.calculateRatio(1,assets, calculatedRisk, calculatedReward);
+		List<Tuple<Integer,Double>> myAns = Operations.calculateRatio(assets, calculatedRisk, calculatedReward);
 		int z = ans.size();
 		Tuple<Integer,Double> curr;
 //		for(Tuple<Integer,Double> t:myAns){
@@ -72,7 +77,7 @@ public class TestOperations {
 		double calculatedRisk = -2.1;
 		double calculatedReward = -5.4;
 		List<Tuple<Integer,Double>> ans = new ArrayList<Tuple<Integer,Double>>();
-		myAns = Operations.calculateRatio(1,assets, calculatedRisk, calculatedReward);
+		List<Tuple<Integer,Double>> myAns = Operations.calculateRatio(assets, calculatedRisk, calculatedReward);
 		ans.add(new Tuple<Integer,Double>(1,0.0));
 		ans.add(new Tuple<Integer,Double>(2,0.0));
 		ans.add(new Tuple<Integer,Double>(3,0.0));
