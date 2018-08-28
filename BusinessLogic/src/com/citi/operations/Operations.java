@@ -42,17 +42,17 @@ public class Operations {
 			return function.value(risk);
 		}
 		
-		public static List<Tuple<ClientGoal, Boolean>> goalsMet(double presentValue,double reward,List<ClientGoal> clientGoals ){
-			List<Tuple<ClientGoal, Boolean>> goalsMetList = new ArrayList<>() ;
+		public static List<Tuple<Long,Boolean>> goalsMet(double presentValue,double reward,List<ClientGoal> clientGoals ){
+			List<Tuple<Long, Boolean>> goalsMetList = new ArrayList<>() ;
 			
 			for(ClientGoal goal : clientGoals){
 				if(goal.getGoalAmount()>calculateAmountValue(presentValue,reward,goal.getTargetYear())){
-					Tuple<ClientGoal, Boolean> goalMet = new Tuple<ClientGoal, Boolean>(goal, true);
+					Tuple<Long, Boolean> goalMet = new Tuple<Long, Boolean>(goal.getGoalId(), true);
 					goalsMetList.add(goalMet);
 					
 				}
 				else{
-					Tuple<ClientGoal, Boolean> goalMet = new Tuple<ClientGoal, Boolean>(goal, false);
+					Tuple<Long, Boolean> goalMet = new Tuple<Long, Boolean>(goal.getGoalId(), false);
 					goalsMetList.add(goalMet);
 				}
 			}

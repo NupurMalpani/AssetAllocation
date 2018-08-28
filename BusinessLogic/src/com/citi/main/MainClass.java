@@ -22,8 +22,8 @@ public class MainClass {
 		double risk=Operations.calculateRisk(assets, clientResponse);
 		double reward=Operations.calculateReward(assets, risk, 1);
 		double PresentValue=Operations.calculateA(clientResponse, reward);
-		List<Tuple<ClientGoal, Boolean>> ans=Operations.goalsMet(PresentValue, reward, clientResponse.getGoals());
-		Tuple<Long, List<Tuple<ClientGoal, Boolean>>> lists=new Tuple<Long, List<Tuple<ClientGoal,Boolean>>>(clientResponse.getClientId(),ans );
+		List<Tuple<Long, Boolean>> ans=Operations.goalsMet(PresentValue, reward, clientResponse.getGoals());
+		Tuple<Long, List<Tuple<Long, Boolean>>> lists=new Tuple<Long, List<Tuple<Long,Boolean>>>(clientResponse.getClientId(),ans );
 		
 		
 	}
