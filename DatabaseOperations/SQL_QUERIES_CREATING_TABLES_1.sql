@@ -1,3 +1,4 @@
+create database myciti;
 use myciti;
 
 CREATE TABLE ClientInfoPage (
