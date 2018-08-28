@@ -7,6 +7,7 @@ import org.apache.commons.math3.util.MathArrays.Function;
 
 import com.citi.dao.AssetDAO;
 import com.citi.dao.ClientDAO;
+import com.citi.dao.ClientGoalDAO;
 import com.citi.operations.Operations;
 import com.citi.pojo.Asset;
 import com.citi.pojo.ClientGoal;
@@ -24,7 +25,8 @@ public class MainClass {
 		double PresentValue=Operations.calculateA(clientResponse, reward);
 		List<Tuple<Long, Boolean>> ans=Operations.goalsMet(PresentValue, reward, clientResponse.getGoals());
 		Tuple<Long, List<Tuple<Long, Boolean>>> lists=new Tuple<Long, List<Tuple<Long,Boolean>>>(clientResponse.getClientId(),ans );
-		
+		ClientGoalDAO clientGoalDAO=new ClientGoalDAO();
+		clientGoalDAO.updateGoalsMet(lists);
 		
 	}
 
