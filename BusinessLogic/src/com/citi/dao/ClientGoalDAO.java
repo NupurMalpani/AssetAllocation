@@ -53,7 +53,7 @@ public class ClientGoalDAO {
 		int rowsAffected=0;
 		try {
 			Statement statement=conn.createStatement();
-			conn.setAutoCommit(false);
+			conn.setAutoCommit(false); 
 //			preparedStatement = conn.prepareStatement(UPDATE_GOAL_STATUS);
 //			long clientId=clientGoalsList.getX();
 //			preparedStatement.setLong(2,clientId);
