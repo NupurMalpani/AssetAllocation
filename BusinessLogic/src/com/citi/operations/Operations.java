@@ -2,19 +2,13 @@ package com.citi.operations;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
-import java.util.HashMap;
-import java.util.Iterator;
 import java.util.List;
-import java.util.Map;
-import java.util.stream.Collector;
 import java.util.stream.IntStream;
 
 import org.apache.commons.math3.analysis.polynomials.PolynomialFunction;
 import org.apache.commons.math3.fitting.PolynomialCurveFitter;
 import org.apache.commons.math3.fitting.WeightedObservedPoints;
-import org.apache.commons.math3.util.MathArrays.Function;
 
-import com.citi.pojo.AllocatedAssetResult;
 import com.citi.pojo.Asset;
 import com.citi.pojo.ClientGoal;
 import com.citi.pojo.ClientResponse;
@@ -72,7 +66,7 @@ public class Operations {
 			ArrayList<ArrayList<Double>> a = new ArrayList<ArrayList<Double>>();
 			ArrayList<Double> risk= new ArrayList<Double>();
 			ArrayList<Double> reward = new ArrayList<Double>();
-			ArrayList<Integer> assetId = new ArrayList<Integer>();
+			//ArrayList<Integer> assetId = new ArrayList<Integer>();
 			ArrayList<Double> ratioList = new ArrayList<Double>();
 			assets.forEach(asset -> {risk.add(asset.getRisk()); reward.add(asset.getReward()); ratioList.add(1.0);});
 			Collections.addAll(a,risk,reward,ratioList);
