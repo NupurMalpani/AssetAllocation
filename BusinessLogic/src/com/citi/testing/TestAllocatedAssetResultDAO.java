@@ -20,10 +20,11 @@ public class TestAllocatedAssetResultDAO {
 	}
 
 	@Test
-	public void testStoreAllocatedAssetsPoitive() {
+	public void testStoreAllocatedAssetsPositive() {
 		AllocatedAssetResultDAO allocatedAssetResultDAO=new AllocatedAssetResultDAO();
-		AllocatedAssetResult result=new AllocatedAssetResult()
-		allocatedAssetResultDAO.storeAllocatedAssets();
+		AllocatedAssetResult result=new AllocatedAssetResult();
+		int rowsAffected=allocatedAssetResultDAO.storeAllocatedAssets(result);
+		assertTrue(rowsAffected!=0);
 	}
 	@Test
 	public void testStoreAllocatedAssetsNegative() {

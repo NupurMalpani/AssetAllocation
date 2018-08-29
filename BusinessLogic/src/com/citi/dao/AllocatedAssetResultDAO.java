@@ -21,7 +21,6 @@ public class AllocatedAssetResultDAO {
 	public int storeAllocatedAssets(AllocatedAssetResult result) {
 		int rowsAffected=0; 
 		Connection conn = MyConnection.getMyConnection();
-
 		try {
 			int whileCount=0;
 //			PreparedStatement preparedStatement=conn.prepareStatement(INSERT_ALLOCATED_ASSETS);		
