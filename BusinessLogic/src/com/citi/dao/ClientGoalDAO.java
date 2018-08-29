@@ -4,8 +4,10 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.IntStream;
 
 import com.citi.connections.MyConnection;
 import com.citi.pojo.ClientGoal;
@@ -40,20 +42,37 @@ public class ClientGoalDAO {
 		return goals;
 	}
 	
+	public String createSql(boolean goalsMet,long clientId, long goalId) {
+		return  "UPDATE FinancialGoals SET GoalsMet="+goalsMet+" WHERE ClientId="+clientId+" AND GoalId="+goalId;
+	}
+	
 	public int updateGoalsMet (Tuple<Long, List<Tuple<Long, Boolean>>> clientGoalsList) {
 		Connection conn=MyConnection.getMyConnection();
-		String UPDATE_GOAL_STATUS="UPDATE FinancialGoals SET GoalsMet=? WHERE ClientId=? AND GoalId=?";
-		PreparedStatement preparedStatement;
+		long clientId=clientGoalsList.getX();
+//		PreparedStatement preparedStatement;
 		int rowsAffected=0;
 		try {
-			preparedStatement = conn.prepareStatement(UPDATE_GOAL_STATUS);
-			long clientId=clientGoalsList.getX();
-			preparedStatement.setLong(2,clientId);
+			Statement statement=conn.createStatement();
+			conn.setAutoCommit(false);
+//			preparedStatement = conn.prepareStatement(UPDATE_GOAL_STATUS);
+//			long clientId=clientGoalsList.getX();
+//			preparedStatement.setLong(2,clientId);
 			List<Tuple<Long, Boolean>> goalsList=clientGoalsList.getY();
+			int forCount=0;
 			for(Tuple<Long,Boolean> goal:goalsList) {
-				preparedStatement.setBoolean(1, goal.getY());
-				preparedStatement.setLong(3, goal.getX());	
-				rowsAffected+=preparedStatement.executeUpdate();
+//				preparedStatement.setBoolean(1, goal.getY());
+//				preparedStatement.setLong(3, goal.getX());	
+				long goalId=goal.getX();
+				boolean goalsMet=goal.getY();
+				statement.addBatch(createSql(goalsMet, clientId, goalId));
+				forCount++;
+			}
+			int updateCount = IntStream.of(statement.executeBatch()).sum();
+			if(updateCount == forCount) {
+				conn.commit();
+			}
+			else {
+				conn.rollback();
 			}
 			if(rowsAffected==0) {
 				System.out.println("Error in updation. Cannot commit.");
